@@ -1,1 +1,27 @@
 {% extends "base.html" %}
+
+{% block content %}
+    <style>
+        .home {
+            text-align: center;
+        }
+
+        .link {
+            text-decoration: none;
+            color: black;
+        }
+
+        .link:hover {
+            text-decoration: underline;
+            color: red;
+        }
+    </style>
+    <body>
+        <div class="home">
+            <h1>Controle de Estoque</h1>
+            <p>Sistema de controle de estoque web feito com Django por <strong><a href="https://www.linkedin.com/in/luiz-henrique-12938825b/" class="link" target="_blank">Luiz Henrique</a></strong></p>
+        </div>
+    </body>
+
+
+{% endblock %}
