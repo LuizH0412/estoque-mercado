@@ -63,8 +63,12 @@
         a:hover {
             color: #007bff;
         }
+        .search {
+            padding-top: 15px;
+            text-align: center;
+        }
     </style>
-    <form action="{% url 'produtos' %}" method="get">
+    <form action="{% url 'produtos' %}" method="get" class="search">
         <input type="text" name="search" placeholder="Buscar produto..">
         <button type="submit">Buscar</button>
     </form>
