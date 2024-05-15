@@ -84,6 +84,7 @@
                         <li><strong><a href="{% url 'logout' %}">Sair</a></strong></li>
                     {% endif %}
                 {% else %}
+                    <li><strong><a href="{% url 'home' %}">Inicio</a></strong></li>
                     <li><strong><a href="{% url 'login' %}">Entrar</a></strong></li>
                     <li><strong><a href="{% url 'registro' %}">Registre-se</a></strong></li>
                 {% endif %}

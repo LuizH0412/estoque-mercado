@@ -19,7 +19,13 @@
     <body>
         <div class="home">
             <h1>Controle de Estoque</h1>
+
             <p>Sistema de controle de estoque web feito com Django por <strong><a href="https://www.linkedin.com/in/luiz-henrique-12938825b/" class="link" target="_blank">Luiz Henrique</a></strong></p>
+            {% if user.is_authenticated %}
+                <p>Navegue pelo menu para usufruir das funcionalidades</p>
+            {% else %}
+                <p><strong>Registre-se ou faça login</strong> para usufruir das funcionalidades</p>
+            {% endif %}
         </div>
     </body>
 
