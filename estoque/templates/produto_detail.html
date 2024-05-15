@@ -80,7 +80,7 @@
     <div class="func-card">
         <h2 class="subli">{{ object.nome }}</h2>
         <p><strong>Quantidade: </strong>{{ object.quantidade }} - {{ object.medida }}</p>
-        <p><strong>Valor: </strong>{{ object.valor }}</p>
+        <p><strong>Valor: </strong>R${{ object.valor_unidade }}</p>
         <p><strong>Data de Entrada: </strong>{{ object.data_entrada }}</p>
         <p><strong>Tipo: </strong>{{ object.tipo }}</p>
     </div>
@@ -88,6 +88,10 @@
         <div class="buttons-container">
             <a href="{% url 'editar_produto' pk=object.pk %}" class="btn btn-primary">Editar</a>
             <a href="{% url 'deletar_produto' pk=object.pk %}" class="btn btn-danger">Deletar</a>
+        </div>
+    {% else %}
+        <div class="buttons-container">
+            <a href="{% url 'produtos' %}" class="btn btn-primary">Voltar</a>
         </div>
     {% endif %}
 {% endblock %}

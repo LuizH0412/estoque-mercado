@@ -5,17 +5,14 @@ from estoque.models import Produto, ProdutoInventario
 
 def produto_update_inventario():
     tot_produtos = Produto.objects.all().count()
-    tot_valor = Produto.objects.aggregate(
-        total_valor=Sum('valor')
-    )['total_valor']
     ProdutoInventario.objects.create(
-        tot_produtos= tot_produtos,
-        tot_valor= tot_valor
+        tot_produtos= tot_produtos
     )
 
 @receiver(post_save, sender=Produto)
-def produto_post_save(sender, instance, **kwargs):
-    produto_update_inventario()
+def produto_post_save(sender, instance, created, **kwargs):
+    if created:
+        produto_update_inventario()
 
 
 @receiver(post_delete, sender=Produto)

@@ -20,7 +20,7 @@ class Produto(models.Model):
     nome = models.CharField(max_length=200)
     medida = models.ForeignKey(UnidadeMedida, on_delete=models.CASCADE, related_name='medida_produto')
     quantidade = models.IntegerField()
-    valor = models.FloatField()
+    valor_unidade = models.FloatField()
     data_entrada = models.DateField(auto_now_add=True)
     tipo = models.ForeignKey(Tipo, on_delete=models.CASCADE, related_name='tipo_produto')
 
@@ -31,7 +31,6 @@ class Produto(models.Model):
 
 class ProdutoInventario(models.Model):
     tot_produtos = models.IntegerField()
-    tot_valor = models.FloatField()
     data_registro = models.DateTimeField(auto_now_add=True)
 
     class Meta:

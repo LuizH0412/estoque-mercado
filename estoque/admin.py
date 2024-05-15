@@ -8,7 +8,7 @@ class TipoAdmin(admin.ModelAdmin):
 
 
 class ProdutoAdmin(admin.ModelAdmin):
-    list_display = ('nome', 'medida', 'quantidade', 'valor', 'data_entrada', 'tipo')
+    list_display = ('nome', 'medida', 'quantidade', 'valor_unidade', 'data_entrada', 'tipo')
     search_fields = ('id', 'nome', 'data_entrada')
 
 class MedidaAdmin(admin.ModelAdmin):

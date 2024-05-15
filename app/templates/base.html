@@ -65,6 +65,15 @@
         nav ul li.active a:hover {
             background-color: #999;
         }
+
+        .link {
+            text-decoration: none;
+        }
+
+        .link:hover {
+            text-decoration: underline;
+            color: red;
+        }
     </style>
 </head>
 <body>
@@ -80,7 +89,7 @@
                         <li><strong><a href="{% url 'logout' %}">Sair</a></strong></li>
                     {% else %}
                         <li><strong><a href="{% url 'home' %}">Inicio</a></strong></li>
-                        <li><strong><a href="{% url 'estoque' %}">Produtos</a></strong></li>
+                        <li><strong><a href="{% url 'produtos' %}">Produtos</a></strong></li>
                         <li><strong><a href="{% url 'logout' %}">Sair</a></strong></li>
                     {% endif %}
                 {% else %}
@@ -98,7 +107,7 @@
     </main>
 
     <footer>
-        <p>&copy; 2024 Estoque</p>
+        <p>&copy; 2024 <a href="https://github.com/LuizBackCode/estoque-mercado" target="_blank" class="link">Estoque</a></p>
     </footer>
 </body>
 </html>
