@@ -1,4 +1,3 @@
-from django.db.models.query import QuerySet
 from django.shortcuts import render
 from estoque.forms import ProdutoModelForm
 from estoque.models import Produto

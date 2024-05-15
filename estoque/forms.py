@@ -9,7 +9,7 @@ class ProdutoModelForm(forms.ModelForm):
 
 
     def clean_valor(self):
-        valor = self.cleaned_data.get('valor')
+        valor = self.cleaned_data.get('valor_unidade')
 
         if valor <= 0:
             raise forms.ValidationError('O valor deve ser maior que 0.')
