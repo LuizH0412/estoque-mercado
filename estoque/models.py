@@ -22,7 +22,7 @@ class Produto(models.Model):
     quantidade = models.IntegerField()
     valor_unidade = models.FloatField()
     data_entrada = models.DateField(auto_now_add=True)
-    tipo = models.ForeignKey(Tipo, on_delete=models.CASCADE, related_name='tipo_produto')
+    categoria = models.ForeignKey(Tipo, on_delete=models.CASCADE, related_name='tipo_produto')
 
 
     def __str__(self):

@@ -6,6 +6,7 @@ from django.views.generic import ListView, CreateView, DetailView,UpdateView, De
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.contrib.auth.models import User
 
 
 class HomeView(View):
@@ -42,6 +43,7 @@ class AdicionarProdutoView(CreateView):
 class ProdutoDetailView(DetailView):
     model = Produto
     template_name = 'produto_detail.html'
+    context_object_name = 'profile'
 
 
 @method_decorator(login_required(login_url='login'), name='dispatch')

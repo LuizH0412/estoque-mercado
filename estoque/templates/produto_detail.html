@@ -80,9 +80,9 @@
     <div class="func-card">
         <h2 class="subli">{{ object.nome }}</h2>
         <p><strong>Quantidade: </strong>{{ object.quantidade }} - {{ object.medida }}</p>
-        <p><strong>Valor: </strong>R${{ object.valor_unidade }}</p>
+        <p><strong>Valor Unitário: </strong>R${{ object.valor_unidade|floatformat:2 }}</p>
         <p><strong>Data de Entrada: </strong>{{ object.data_entrada }}</p>
-        <p><strong>Tipo: </strong>{{ object.tipo }}</p>
+        <p><strong>Tipo: </strong>{{ object.categoria }}</p>
     </div>
     {% if user.is_superuser %}
         <div class="buttons-container">

@@ -81,7 +81,7 @@
                         <div class="center">
                             <h2>{{ produto.nome }}</h2>
                             <p>Quantidade: {{ produto.quantidade }} - {{ produto.medida }}</p>
-                            <p>Valor: R${{ produto.valor_unidade }}</p>
+                            <p>Valor Unitário: R${{ produto.valor_unidade|floatformat:2 }}</p>
                         </div>
                     </div>
                 </a>
