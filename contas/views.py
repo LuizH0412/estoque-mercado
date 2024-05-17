@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.views import View
 
 
+# View que cuida do registro de novos usúarios no sistema 
 class RegistroView(View):
 
     def get(self, request):
@@ -28,7 +29,7 @@ class RegistroView(View):
         )
 
 
-
+# View que cuida do login de usúarios já cadastrados
 class LoginView(View):
 
     def get(self, request):
@@ -57,7 +58,7 @@ class LoginView(View):
             {'login_form', login_form}
         )
     
-
+# View usada para possibilidar a saida da conta logada
 class LogoutView(View):
     
     def get(self, request):

@@ -1,7 +1,8 @@
 from django import forms
-from estoque.models import Produto
+from estoque.models import Produto, Feedback, Funcionarios
 
 
+# Classe Form que é utilizada para o cadastro de novos produtos e filtra eles pelo valor e quantidade
 class ProdutoModelForm(forms.ModelForm):
     class Meta():
         model = Produto
@@ -23,3 +24,17 @@ class ProdutoModelForm(forms.ModelForm):
             raise forms.ValidationError('Não é possivel cadastrar 0 ou menos itens.')
         else:
             return quantidade
+        
+
+# Classe Form que é utilizada para o cadastro de feedbacks de visitantes do site.
+class FeedbackForm(forms.ModelForm):
+    class meta():
+        model = Feedback
+        fields = '__all__'
+
+
+# Classe Form que é utilizada para o cadastro de funcionários
+class FuncionarioForm(forms.ModelForm):
+    class meta():
+        model = Funcionarios
+        fields = '__all__'

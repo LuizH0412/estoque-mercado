@@ -1,14 +1,15 @@
+from django.db.models.query import QuerySet
 from django.shortcuts import render
-from estoque.forms import ProdutoModelForm
-from estoque.models import Produto
+from estoque.forms import ProdutoModelForm, FeedbackForm, FuncionarioForm
+from estoque.models import Produto, Feedback, Funcionarios
 from django.views import View
 from django.views.generic import ListView, CreateView, DetailView,UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from django.contrib.auth.models import User
 
 
+# View que renderiza a pagina home do projeto
 class HomeView(View):
 
     def get(self, request):
@@ -17,6 +18,8 @@ class HomeView(View):
             'home.html',
         )
 
+# Decorator que impeça que quem não esteja logado acesse outras áreas do projeto sem estar logado.
+# View que retorna a exibição dos produtos, filtra e ordena pelo nome, além da lógica de busca dos produtos.
 @method_decorator(login_required(login_url='login'), name='dispatch')
 class ProdutosView(ListView):
     model = Produto
@@ -31,6 +34,9 @@ class ProdutosView(ListView):
             produto = produto.filter(nome__icontains=search)
         return produto
 
+
+# Decorator que impeça que quem não esteja logado acesse outras áreas do projeto sem estar logado.
+# View que cuida do cadastro de novos produtos e renderiza a pagina de cadastro de produtos.
 @method_decorator(login_required(login_url='login'), name='dispatch')
 class AdicionarProdutoView(CreateView):
     model = Produto
@@ -39,6 +45,8 @@ class AdicionarProdutoView(CreateView):
     success_url = '/produtos/'
 
 
+# Decorator que impeça que quem não esteja logado acesse outras áreas do projeto sem estar logado.
+# View que cuida de renderizar a página de detalhes do produto.
 @method_decorator(login_required(login_url='login'), name='dispatch')
 class ProdutoDetailView(DetailView):
     model = Produto
@@ -46,6 +54,8 @@ class ProdutoDetailView(DetailView):
     context_object_name = 'profile'
 
 
+# Decorator que impeça que quem não esteja logado acesse outras áreas do projeto sem estar logado.
+# View que cuida do update de produtos cadastrados e renderiza a página de update dos produtos.
 @method_decorator(login_required(login_url='login'), name='dispatch')
 class ProdutoUpdateView(UpdateView):
     model = Produto
@@ -56,8 +66,59 @@ class ProdutoUpdateView(UpdateView):
         return reverse_lazy('produto_detail', kwargs={'pk': self.object.pk})
 
 
+# Decorator que impeça que quem não esteja logado acesse outras áreas do projeto sem estar logado.
+# View que cuida do delete dos produtos cadastrados e renderiza a página de deleção dos produtos.
 @method_decorator(login_required(login_url='login'), name='dispatch')
 class ProdutoDeleteView(DeleteView):
     model = Produto
     template_name = 'produto_delete.html'
+    success_url = '/home/'
+
+
+# Decorator que impeça que quem não esteja logado acesse outras áreas do projeto sem estar logado.
+# View que cuida da busca e filtragem de feedbacks do site
+@method_decorator(login_required(login_url='login'), name='dispatch')
+class FeedbackView(ListView):
+    model = Feedback
+    template_name = 'feedback.html'
+    context_object_name = 'feedback'
+
+    def get_queryset(self):
+        feedback = super().get_queryset().order_by('-data_feedback')
+        search = self.request.GET.get('search')
+
+        if search:
+            feedback = feedback.filter(nome__icontains=search)  
+        return feedback
+
+
+@method_decorator(login_required(login_url='login'), name='dispatch')
+class AdicionarFeedback(CreateView):
+    model = Feedback
+    form_class = FeedbackForm
+    template_name = 'add_feedback.html'
+    success_url = '/feedback/'
+
+# Decorator que impeça que quem não esteja logado acesse outras áreas do projeto sem estar logado.
+# View que cuida da busca e filtragem de funcionarios do site
+@method_decorator(login_required(login_url='login'), name='dispatch')
+class FuncionarioView(ListView):
+    model = Funcionarios
+    template_name = 'add_funcionario.html'
+    context_object_name = 'funcionario'
+
+    def get_queryset(self):
+        funcionario = super().get_queryset().order_by('nome')
+        search = self.request.GET.get('search')
+
+        if search:
+            funcionario = funcionario.filter(nome__icontains=search)
+        return funcionario
+
+
+@method_decorator(login_required(login_url='login'), name='dispatch')
+class AdicionarFuncionario(CreateView):
+    model = Funcionarios
+    form_class = FuncionarioForm
+    template_name = 'add_funcionario.html'
     success_url = '/home/'
