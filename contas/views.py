@@ -1,3 +1,4 @@
+from django import forms
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
@@ -49,13 +50,14 @@ class LoginView(View):
             login(request, user)
             return redirect('home')
         else:
-            login_form = AuthenticationForm()
+            login_form = AuthenticationForm(data=request.POST)
+            login_form.add_error(None, '') 
 
         
         return render(
             request,
             'login.html',
-            {'login_form', login_form}
+            {'login_form': login_form}
         )
     
 # View usada para possibilidar a saida da conta logada

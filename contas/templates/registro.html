@@ -1,41 +1,335 @@
-{% extends "base.html" %}
+{% load static %}
 
-{% block content %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro</title>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Produtos</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static 'img/favicon.png' %}" rel="icon">
+  <link href="{% static 'img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="{% static 'css/main.css' %}" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Arsha
+  * Template URL: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/
+  * Updated: May 13 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+<style>
+    form {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+table {
+  width: 100%;
+}
+
+table tr {
+  margin-bottom: 10px;
+}
+
+table td {
+  padding: 5px;
+}
+
+input[type="submit"] {
+  width: 100px;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  margin: 0 auto ;
+  display: block;
+}
+
+input[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+.login{
+    border-radius: 15px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+    width: 30%;
+    height: 500px;
+    display: block;
+    margin: 0 auto;
+}
+
+.login:hover {
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.71);
+    transform: translateY(-10px);
+    transition: ease-in-out 0.3s;
+}
+
+.login:not(:hover){
+    transform: translateX(10px);
+    transition: ease-in-out 0.3s;
+}
+
+.h4-login {
+    text-align: center;
+    padding-bottom: 15px;
+    padding-top: 20px;
+}
+
+.p-senha {
+    text-align: center;
+    padding-top: 20px;
+}
+
+
+.link:hover {
+    text-decoration: underline;
+}
+
+.td-form {
+    margin: 0 auto;
+}
+
+.align {
+    text-align: center;
+    margin: 0 auto;
+    padding-bottom: 10px;
+}
+
+label:hover {
+    text-decoration: underline;
+}
+
+.error {
+    text-align: center;
+
+}
+
+.error:hover {
+    color: red;
+    text-decoration: underline;
+}
+  </style>
 </head>
-<body>
-    <h1>Registre-se</h1>
 
-    <form method="post">
-        {% csrf_token %}
+<body class="index-page">
 
-        <div class="form-group">
-            {{ user_form.username.errors }}
-            <label>Usuário: </label>
-            {{ user_form.username }}
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center">
+
+      <a href="{% url 'home' %}" class="logo d-flex align-items-center me-auto">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <h1 class="sitename">InvenTech</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          {% if user.is_authenticated %}
+            {% if user.is_superuser %}
+              <li><a href="{% url 'home' %}" class="">Home</a></li>
+              <li><a href="{% url 'produtos' %}">Produtos</a></li>
+              <li><a href="{% url 'add_produto' %}">Cadastrar Produtos</a></li>
+              <li><a href="{% url 'feedback' %}">Feedback</a></li>
+            {% else %}
+              <li><a href="{% url 'home' %}" class="">Home</a></li>
+              <li><a href="{% url 'produtos' %}">Produtos</a></li>
+              <li><a href="{% url 'feedback' %}">Feedback</a></li>
+            {% endif %}
+          {% else %}
+            <li><a href="{% url 'home' %}" class="">Home</a></li>
+          {% endif %}
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+      {% if not user.is_authenticated %}
+        <a class="btn-getstarted" href="{% url 'login' %}">Entrar</a>
+      {% endif %}
+
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero section">
+
+      <div class="container">
+        <div class="row gy-4">
+          <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center" data-aos="zoom-out">
+            <h1 class="">Registre-se</h1>
+            <p class="">Cadastre sua conta no sistema logo abaixo</p>
+          </div>
+          <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-out" data-aos-delay="200">
+            <img src="{% static 'img/hero-img.png' %}" class="img-fluid animated" alt="">
+          </div>
+        </div>
+      </div>
+    </section><!-- /Hero Section -->
+
+    <section id="about" class="about section">
+        
+        <div class="login">
+            <form method="post">
+                {% csrf_token %}
+                <h4 class="h4-login"><strong>Register</strong></h4>
+
+                <div class="align">
+                    <div class="error">
+                        {{ user_form.username.errors }}
+                    </div>
+                    <label for="id_username"><strong>Usuário:</strong></label>
+                    <br>
+                    {{ user_form.username }}
+                </div>
+                
+                <div class="align">
+                    <div class="error">
+                        {% if user_form.password1.errors %}
+                            {% for error in user_form.password1.errors %}
+                                {{ error }}
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    <label for="id_password1"><strong>Senha:</strong></label>
+                    <br>
+                    {{ user_form.password1 }}
+                </div>
+
+                <div class="align">
+                    <label for="id_password2"><strong>Confirmar senha:</strong></label>
+                    <br>
+                    {{ user_form.password2 }}
+                    <div class="error">
+                        {% if user_form.password2.errors %}
+                            {% for error in user_form.password2.errors %}
+                                {{ error }}
+                                <br>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+
+                <input type="submit" value="Cadastrar">
+                <p class="p-senha">Já possui uma conta? <a href="{% url 'login' %}" class="link"><strong>Clique aqui</strong></a></p>
+            </form>
         </div>
 
-        <div class="form-group">
-            {{ user_form.password1.errors }}
-            <label>Senha: </label>
-            {{ user_form.password1 }}
+    </section>
+  </main>
+
+  <footer id="footer" class="footer">
+
+    <div class="container footer-top">
+      <div class="row gy-4">
+        <div class="col-lg-4 col-md-6 footer-about">
+          <a href="{% url 'home' %}" class="d-flex align-items-center">
+            <span class="sitename">Contact</span>
+          </a>
+          <div class="footer-contact pt-3">
+            <p>Cuiabá - MT</p>
+            <p><strong>Email:</strong> <span>luizpq33@gmail.com</span></p>
+          </div>
         </div>
 
-        <div class="form-group">
-            {{ user_form.password2.errors }}
-            <label>Confirmação de senha: </label>
-            {{ user_form.password2 }}
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Useful Links</h4>
+          <ul>
+            {% if user.is_authenticated %}
+              {% if user.is_superuser %}
+                <li><i class="bi bi-chevron-right"></i> <a href="{% url 'home' %}">Home</a></li>
+                <li><i class="bi bi-chevron-right"></i> <a href="{% url 'produtos' %}">Produtos</a></li>
+                <li><i class="bi bi-chevron-right"></i> <a href="{% url 'add_produto' %}">Cadastrar Produtos</a></li>
+                <li><i class="bi bi-chevron-right"></i> <a href="{% url 'feedback' %}">Feedback</a></li>
+              {% else %}
+                <li><i class="bi bi-chevron-right"></i> <a href="{% url 'home' %}">Home</a></li>
+                <li><i class="bi bi-chevron-right"></i> <a href="{% url 'produtos' %}">Produtos</a></li>
+                <li><i class="bi bi-chevron-right"></i> <a href="{% url 'feedback' %}">Feedback</a></li>
+              {% endif %}
+            {% else %}
+              <li><i class="bi bi-chevron-right"></i> <a href="{% url 'home' %}">Home</a></li>
+            {% endif %}
+          </ul>
         </div>
 
-        <div class="form-group">
-            <input type="submit" value="Cadastrar">
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Our Services</h4>
+          <ul>
+          </ul>
         </div>
-    </form>
+
+        <div class="col-lg-4 col-md-12">
+          <h4>Siga</h4>
+          <p>Me siga em minha redes sociais</p>
+          <div class="social-links d-flex">
+            <a href="https://x.com/lulizkkk?s=09" target="_blank"><i class="bi bi-twitter"></i></a>
+            <a href="https://www.facebook.com/luiz.henriqued.alvarenga?mibextid=JRoKGi" target="_blank"><i class="bi bi-facebook"></i></a>
+            <a href="https://www.instagram.com/luiz_alva04/" target="_blank"><i class="bi bi-instagram"></i></a>
+            <a href="https://www.linkedin.com/in/luiz-henrique-12938825b/" target="_blank"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container copyright text-center mt-4">
+      <p>© <span>Copyright</span> <strong class="px-1 sitename">Arsha</strong> <span>All Rights Reserved</span></p>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you've purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'vendor/php-email-form/validate.js' %}"></script>
+  <script src="{% static 'vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'vendor/waypoints/noframework.waypoints.js' %}"></script>
+  <script src="{% static 'vendor/imagesloaded/imagesloaded.pkgd.min.js' %}"></script>
+  <script src="{% static 'vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+
+  <!-- Main JS File -->
+  <script src="{% static 'js/main.js' %}"></script>
+
+
 </body>
+
 </html>
-{% endblock %}
