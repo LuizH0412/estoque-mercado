@@ -1,5 +1,5 @@
 from django import forms
-from estoque.models import Produto, Feedback, Funcionarios
+from estoque.models import Produto, Feedback
 
 
 # Classe Form que é utilizada para o cadastro de novos produtos e filtra eles pelo valor e quantidade
@@ -33,8 +33,3 @@ class FeedbackForm(forms.ModelForm):
         fields = '__all__'
 
 
-# Classe Form que é utilizada para o cadastro de funcionários
-class FuncionarioForm(forms.ModelForm):
-    class meta():
-        model = Funcionarios
-        fields = '__all__'

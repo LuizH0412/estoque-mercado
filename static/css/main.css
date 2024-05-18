@@ -1443,6 +1443,7 @@ section,
 
 .team .team-member:hover {
   transform: translateY(-10px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.747); /* Sombra leve */
 }
 
 .team .team-member .member-info {
@@ -1452,7 +1453,7 @@ section,
 @media (max-width: 468px) {
   .team .team-member .member-info {
     padding: 30px 0 0 0;
-    text-align: center;
+    text-align: justify;
   }
 }
 

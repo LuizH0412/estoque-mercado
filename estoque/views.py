@@ -1,7 +1,6 @@
-from django.db.models.query import QuerySet
 from django.shortcuts import render
-from estoque.forms import ProdutoModelForm, FeedbackForm, FuncionarioForm
-from estoque.models import Produto, Feedback, Funcionarios
+from estoque.forms import ProdutoModelForm, FeedbackForm
+from estoque.models import Produto, Feedback
 from django.views import View
 from django.views.generic import ListView, CreateView, DetailView,UpdateView, DeleteView
 from django.urls import reverse_lazy
@@ -20,10 +19,9 @@ class HomeView(View):
 
 # Decorator que impeça que quem não esteja logado acesse outras áreas do projeto sem estar logado.
 # View que retorna a exibição dos produtos, filtra e ordena pelo nome, além da lógica de busca dos produtos.
-@method_decorator(login_required(login_url='login'), name='dispatch')
 class ProdutosView(ListView):
     model = Produto
-    template_name = 'estoque.html'
+    template_name = 'produtos.html'
     context_object_name = 'produtos'
 
     def get_queryset(self):
@@ -99,26 +97,4 @@ class AdicionarFeedback(CreateView):
     template_name = 'add_feedback.html'
     success_url = '/feedback/'
 
-# Decorator que impeça que quem não esteja logado acesse outras áreas do projeto sem estar logado.
-# View que cuida da busca e filtragem de funcionarios do site
-@method_decorator(login_required(login_url='login'), name='dispatch')
-class FuncionarioView(ListView):
-    model = Funcionarios
-    template_name = 'add_funcionario.html'
-    context_object_name = 'funcionario'
 
-    def get_queryset(self):
-        funcionario = super().get_queryset().order_by('nome')
-        search = self.request.GET.get('search')
-
-        if search:
-            funcionario = funcionario.filter(nome__icontains=search)
-        return funcionario
-
-
-@method_decorator(login_required(login_url='login'), name='dispatch')
-class AdicionarFuncionario(CreateView):
-    model = Funcionarios
-    form_class = FuncionarioForm
-    template_name = 'add_funcionario.html'
-    success_url = '/home/'

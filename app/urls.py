@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from contas.views import LoginView, RegistroView, LogoutView
-from estoque.views import AdicionarProdutoView, ProdutosView, ProdutoDetailView, ProdutoUpdateView, ProdutoDeleteView, HomeView, FeedbackView, AdicionarFeedback, AdicionarFuncionario
+from estoque.views import AdicionarProdutoView, ProdutosView, ProdutoDetailView, ProdutoUpdateView, ProdutoDeleteView, HomeView, FeedbackView, AdicionarFeedback
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -15,6 +15,5 @@ urlpatterns = [
     path('produtos/<int:pk>/deletar_produto/', ProdutoDeleteView.as_view(), name='deletar_produto'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('feedback/', FeedbackView.as_view(), name='feedback'),
-    path('add_funcionario/', AdicionarFuncionario.as_view(), name='add_funcionario'),
     path('add_feedback/', AdicionarFeedback.as_view(), name='add_feedback'),
 ]

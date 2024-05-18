@@ -1,14 +1,6 @@
 from django.db import models
 
 
-# Modelo que registra no banco de dados os cargos existentes no sistema
-class Cargo(models.Model):
-    id = models.AutoField(primary_key=True) # Primary Key
-    nome = models.CharField(max_length=40)
-
-    def __str__(self):
-        return self.nome
-
 # Modelo que registra no banco de dados as profissões existentes no sistema
 class Profissao(models.Model):
     id = models.AutoField(primary_key=True) # Primary Key
@@ -84,16 +76,5 @@ class FeedbackContagem(models.Model):
     def __str__(self):
         return self.tot_feedback
 
-
-# Model que registra no banco de dados os funcionários
-class Funcionarios(models.Model):
-    id = models.AutoField(primary_key=True) # Primary Key
-    nome_completo = models.CharField(max_length=60)
-    cargo = models.ForeignKey(Cargo, on_delete=models.CASCADE, related_name='cargo_funcionario')
-    email = models.CharField(max_length=40)
-    data_contratacao = models.DateField()
-
-    def __str__(self):
-        return self.nome
 
     
