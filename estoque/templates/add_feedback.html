@@ -36,6 +36,85 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+  <style>
+    .div-externa {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .div-externa:hover {
+      box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.71);
+      transform: translateY(-10px);
+      transition: ease-in-out 0.3s;
+    }
+
+    .div-externa:not(:hover) {
+      transform: translateX(10px);
+      transition: ease-in-out 0.3s;
+    }
+  
+    .h1-add {
+      font-size: 24px;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+  
+    .div-add {
+      margin-bottom: 20px;
+    }
+  
+    label {
+      font-weight: 500;
+      color: #555;
+    }
+  
+    input[type="text"],
+    input[type="number"],
+    select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+      transition: border-color 0.3s ease-in-out;
+    }
+  
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    select:focus {
+      border-color: #007bff;
+    }
+  
+    .error-div {
+      color: #dc3545;
+      font-size: 14px;
+      text-align: center;
+      margin-top: 5px;
+    }
+  
+    input[type="submit"] {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out;
+    }
+  
+    input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+  </style>
 </head>
 
 <body class="index-page">
@@ -91,13 +170,55 @@
     </section><!-- /Hero Section -->
 
     <section id="about" class="about section">
-        <form method="post">
-            {% csrf_token %}
+      
+        <div class="div-externa">
+          <h1 class="h1-add">Feedback</h1>
+          <form method="post">
+              {% csrf_token %}
 
-            <table>
-                {{ feedback.as_table }}
-            </table>
-        </form>
+              <div class="div-add">
+                  <label for="id_nome"><strong>Nome</strong>:</label>
+                  <br>
+                  {{ form.nome }}
+                  <div class="error-div">
+                    {{ form.nome.errors }}
+                  </div>
+              </div>
+
+              <div class="div-add">
+                  <label for="id_profissao"><strong>Profissão</strong>:</label>
+                  <br>
+                  {{ form.profissao }}
+                  <div class="error-div">
+                    {{ form.profissao.errors }}
+                  </div>
+              </div>
+
+              <div class="div-add">
+                  <label for="id_assunto"><strong>Assunto</strong>:</label>
+                  <br>
+                  {{ form.assunto }}
+                  <div class="error-div">
+                    {{ form.assunto.errors }}
+                  </div>
+              </div>
+
+              <div class="div-add">
+                  <label for="id_texto"><strong>Texto</strong>:</label>
+                  <br>
+                  {{ form.texto }}
+                  <div class="error-div">
+                    {{ form.texto.errors }}
+                  </div>
+              </div class="div-add">
+
+              <div>
+                  <br>
+                  <input type="submit" value="Cadastrar Feedback">
+              </div>
+          </form>
+      </div>
+
     </section>
   </main>
 

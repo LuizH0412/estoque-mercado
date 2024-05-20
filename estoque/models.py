@@ -49,7 +49,7 @@ class ProdutoInventario(models.Model):
         ordering = ['-data_registro'] # Ordenando pela data e hora do mais atual ao mais antigo
 
     def __str__(self):
-        return f'{self.tot_quantidade} - {self.tot_valor}'
+        return f'{self.tot_produtos} - {self.data_registro}'
     
 
 # Model que registra no banco de dados o feedback dos visitantes da página
@@ -62,7 +62,7 @@ class Feedback(models.Model):
     data_feedback = models.DateTimeField(auto_now_add=True) # Incrementa a data automaticamente no momento do registro
     
     def __str__(self):
-        return self.assunto
+        return self.nome
 
 
 # Model que registra no banco de dados a quantidade feedback que o site recebeu
@@ -70,11 +70,11 @@ class FeedbackContagem(models.Model):
     tot_feedback = models.IntegerField()
     data_registro = models.DateTimeField(auto_now_add=True)
 
-    class meta:
+    class Meta:
         ordering = ['-data_registro'] # Ordenando pela data e hora do mais atual ao mais antigo
 
     def __str__(self):
-        return self.tot_feedback
+        return str(f'{self.tot_feedback} - {self.data_registro}')
 
 
     

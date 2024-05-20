@@ -79,8 +79,8 @@ class ProdutoDeleteView(DeleteView):
 @method_decorator(login_required(login_url='login'), name='dispatch')
 class FeedbackView(ListView):
     model = Feedback
-    template_name = 'add_feedback.html'
-    context_object_name = 'feedback'
+    template_name = 'feedback.html'
+    context_object_name = 'feedbacks'
 
     def get_queryset(self):
         feedback = super().get_queryset().order_by('-data_feedback')
@@ -98,4 +98,10 @@ class AdicionarFeedback(CreateView):
     template_name = 'add_feedback.html'
     success_url = '/feedback/'
 
+
+@method_decorator(login_required(login_url='login'), name='dispatch')
+class FeedbackDetailView(DetailView):
+    model = Feedback
+    template_name = 'feedback_detail.html'
+    context_object_name = 'detail_feedback'
 

@@ -24,9 +24,17 @@ class ProdutoModelForm(forms.ModelForm):
 
 # Classe Form que é utilizada para o cadastro de feedbacks de visitantes do site.
 class FeedbackForm(forms.ModelForm):
-    class meta():
+    class Meta():
         model = Feedback
         fields = '__all__'
+    
+
+    def clean_texto(self):
+        texto = self.cleaned_data.get('texto')
+        if len(texto) < 10:
+            raise forms.ValidationError('O texto do feedback deve ter no mínimo 10 caracteres.')
+        else:
+            return texto
         
 
 

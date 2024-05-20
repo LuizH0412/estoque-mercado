@@ -1,11 +1,11 @@
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
-from estoque.models import Produto, ProdutoInventario, Feedback
+from estoque.models import Produto, ProdutoInventario, Feedback, FeedbackContagem
 
 # Função que cria no banco de dados um novo registro de feedback
 def feedback_update_contagem():
     tot_feedback = Feedback.objects.all().count()
-    Feedback.objects.create(
+    FeedbackContagem.objects.create(
         tot_feedback= tot_feedback
     )
 
