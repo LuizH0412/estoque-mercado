@@ -1,4 +1,4 @@
-{% load static %}
+{% load static  %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -6,7 +6,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Produtos</title>
+  <title>Feedback</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -36,74 +36,6 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
-  <style>
-            form {
-            margin-bottom: 20px;
-        }
-
-        input[type="text"] {
-            padding: 8px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-right: 10px;
-        }
-
-        button[type="submit"] {
-            padding: 8px 20px;
-            font-size: 16px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .center {
-            text-align: center;
-        }
-
-
-        .produto-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-
-        .produto-card {
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .produto-card h2 {
-            margin-bottom: 10px;
-            font-size: 20px;
-        }
-
-        .produto-card p {
-            margin: 0;
-        }
-
-        .no-results {
-            font-style: italic;
-            color: #777;
-        }
-
-        a {
-            text-decoration: none;
-            color: black;
-        }
-
-        a:hover {
-            color: #007bff;
-        }
-        .search {
-            padding-top: 15px;
-            text-align: center;
-        }
-
-  </style>
 </head>
 
 <body class="index-page">
@@ -131,10 +63,10 @@
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
-      {% if user.is_authenticated %}
-        <a class="btn-getstarted" href="{% url 'logout' %}">Sair</a>
-      {% else %}
+      {% if not user.is_authenticated %}
         <a class="btn-getstarted" href="{% url 'login' %}">Entrar</a>
+      {% else %}
+        <a class="btn-getstarted" href="{% url 'logout' %}">Sair</a>
       {% endif %}
 
     </div>
@@ -148,8 +80,8 @@
       <div class="container">
         <div class="row gy-4">
           <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center" data-aos="zoom-out">
-            <h1 class="">Produtos</h1>
-            <p class="">Conheça abaixo os produtos que temos em estoque.</p>
+            <h1 class="">Feedback</h1>
+            <p class="">Deixe seu feedback logo abaixo</p>
           </div>
           <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-out" data-aos-delay="200">
             <img src="{% static 'img/hero-img.png' %}" class="img-fluid animated" alt="">
@@ -158,36 +90,15 @@
       </div>
     </section><!-- /Hero Section -->
 
-    <section id="team" class="team section">
+    <section id="about" class="about section">
+        <form method="post">
+            {% csrf_token %}
 
-        <!-- Section Title -->
-        <div class="container section-title" data-aos="fade-up">
-          <h2>Busca</h2>
-          <form action="{% url 'produtos' %}" method="get" class="search">
-            <input type="text" name="search" placeholder="Buscar produto..">
-            <button type="submit">Buscar</button>
-          </form>
-        </div><!-- End Section Title -->
-  
-      <div class="produto-grid">
-          {% if produtos %}
-              {% for produto in produtos %}
-                  <a href="{% url 'produto_detail' produto.pk %}">
-                      <div class="produto-card">
-                          <div class="center">
-                              <h2><strong>{{ produto.nome }}</strong></h2>
-                              <p>Quantidade: {{ produto.quantidade }} {{ produto.medida }}</p>
-                              <p>Valor unidade: R${{ produto.valor_unidade|floatformat:2 }}</p>
-                          </div>
-                      </div>
-                  </a>
-              {% endfor %}
-          {% else %}
-                  <p class="no-result">Nenhum produto encontrado.</p>
-          {% endif %}
-      </div>
-      </section><!-- /Team Section -->
-  
+            <table>
+                {{ feedback.as_table }}
+            </table>
+        </form>
+    </section>
   </main>
 
   <footer id="footer" class="footer">
@@ -195,7 +106,7 @@
     <div class="container footer-top">
       <div class="row gy-4">
         <div class="col-lg-4 col-md-6 footer-about">
-          <a href="index.html" class="d-flex align-items-center">
+          <a href="{% url 'home' %}" class="d-flex align-items-center">
             <span class="sitename">Contact</span>
           </a>
           <div class="footer-contact pt-3">
@@ -208,10 +119,10 @@
           <h4>Useful Links</h4>
           <ul>
             {% if user.is_authenticated %}
-              <li><i class="bi bi-chevron-right"></i> <a href="{% url 'home' %}">Home</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="{% url 'produtos' %}">Produtos</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="{% url 'add_produto' %}">Cadastrar Produtos</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="{% url 'feedback' %}">Feedback</a></li>
+                <li><i class="bi bi-chevron-right"></i> <a href="{% url 'home' %}">Home</a></li>
+                <li><i class="bi bi-chevron-right"></i> <a href="{% url 'produtos' %}">Produtos</a></li>
+                <li><i class="bi bi-chevron-right"></i> <a href="{% url 'add_produto' %}">Cadastrar Produtos</a></li>
+                <li><i class="bi bi-chevron-right"></i> <a href="{% url 'feedback' %}">Feedback</a></li>
             {% else %}
               <li><i class="bi bi-chevron-right"></i> <a href="{% url 'home' %}">Home</a></li>
             {% endif %}

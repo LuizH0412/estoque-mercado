@@ -38,13 +38,84 @@
   ======================================================== -->
   <style>
     .div-externa {
-        width: 100%;
-        height: 400px;
-        margin: 0 auto;
-        background-color: red;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
+    .div-externa:hover {
+      box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.71);
+      transform: translateY(-10px);
+      transition: ease-in-out 0.3s;
+    }
+
+    .div-externa:not(:hover) {
+      transform: translateX(10px);
+      transition: ease-in-out 0.3s;
+    }
+  
+    .h1-add {
+      font-size: 24px;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+  
+    .div-add {
+      margin-bottom: 20px;
+    }
+  
+    label {
+      font-weight: 500;
+      color: #555;
+    }
+  
+    input[type="text"],
+    input[type="number"],
+    select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+      transition: border-color 0.3s ease-in-out;
+    }
+  
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    select:focus {
+      border-color: #007bff;
+    }
+  
+    .error-div {
+      color: #dc3545;
+      font-size: 14px;
+      text-align: center;
+      margin-top: 5px;
+    }
+  
+    input[type="submit"] {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out;
+    }
+  
+    input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
   </style>
+  
 </head>
 
 <body class="index-page">
@@ -75,7 +146,7 @@
       {% if not user.is_authenticated %}
         <a class="btn-getstarted" href="{% url 'login' %}">Entrar</a>
       {% else %}
-        <a class="btn-getstarted" href="{% url 'login' %}">Sair</a>
+        <a class="btn-getstarted" href="{% url 'logout' %}">Sair</a>
       {% endif %}
 
     </div>
@@ -102,39 +173,54 @@
     <section id="about" class="about section">
 
         <div class="div-externa">
-            <h1>Cadastro de Produtos</h1>
+            <h1 class="h1-add">Cadastro de Produtos</h1>
             <form method="post">
                 {% csrf_token %}
 
-                <div>
-                    <label for="id_nome">Nome:</label>
+                <div class="div-add">
+                    <label for="id_nome"><strong>Nome</strong>:</label>
+                    <br>
                     {{ form.nome }}
                     <!-- Exibindo mensagens de erro para o campo nome -->
-                    {{ form.nome.errors }}
+                    <div class="error-div">
+                      {{ form.nome.errors }}
+                    </div>
                 </div>
 
-                <div>
-                    <label for="id_medida">Medida:</label>
+                <div class="div-add">
+                    <label for="id_medida"><strong>Medida:</strong></label>
+                    <br>
                     {{ form.medida }}
-                    {{ form.medida.errors }}
+                    <div class="error-div">
+                      {{ form.medida.errors }}
+                    </div>
                 </div>
 
-                <div>
-                    <label for="id_quantidade">Quantidade:</label>
+                <div class="div-add">
+                    <label for="id_quantidade"><strong>Quantidade</strong>:</label>
+                    <br>
                     {{ form.quantidade }}
-                    {{ form.quantidade.errors }}
+                    <div class="error-div">
+                      {{ form.quantidade.errors }}
+                    </div>
                 </div>
 
-                <div>
-                    <label for="id_valor_unidade">Valor unidade:</label>
+                <div class="div-add">
+                    <label for="id_valor_unidade"><strong>Valor unidade</strong>:</label>
+                    <br>
                     {{ form.valor_unidade }}
-                    {{ form.valor_unidade.errors }}
-                </div>
+                    <div class="error-div">
+                      {{ form.valor_unidade.errors }}
+                    </div>
+                </div class="div-add">
 
-                <div>
-                    <label for="id_categoria">Categoria:</label>
+                <div class="div-add">
+                    <label for="id_categoria"><strong>Categoria</strong>:</label>
+                    <br>
                     {{ form.categoria }}
-                    {{ form.categoria.errors }}
+                    <div class="error-div">
+                      {{ form.categoria.errors }}
+                    </div>
                 </div>
 
                 <div>

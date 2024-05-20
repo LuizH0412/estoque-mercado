@@ -27,5 +27,6 @@ class FeedbackForm(forms.ModelForm):
     class meta():
         model = Feedback
         fields = '__all__'
+        
 
 

@@ -71,7 +71,7 @@ class ProdutoUpdateView(UpdateView):
 class ProdutoDeleteView(DeleteView):
     model = Produto
     template_name = 'produto_delete.html'
-    success_url = '/home/'
+    success_url = '/produtos/'
 
 
 # Decorator que impeça que quem não esteja logado acesse outras áreas do projeto sem estar logado.
@@ -79,7 +79,7 @@ class ProdutoDeleteView(DeleteView):
 @method_decorator(login_required(login_url='login'), name='dispatch')
 class FeedbackView(ListView):
     model = Feedback
-    template_name = 'feedback.html'
+    template_name = 'add_feedback.html'
     context_object_name = 'feedback'
 
     def get_queryset(self):
