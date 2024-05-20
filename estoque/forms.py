@@ -8,23 +8,19 @@ class ProdutoModelForm(forms.ModelForm):
         model = Produto
         fields = '__all__'
 
-
-    def clean_valor(self):
+    def clean_valor_unidade(self):
         valor = self.cleaned_data.get('valor_unidade')
-
         if valor <= 0:
             raise forms.ValidationError('O valor deve ser maior que 0.')
         else:
             return valor
         
-    def clean_qntd(self):
+    def clean_quantidade(self):
         quantidade = self.cleaned_data.get('quantidade')
-
         if quantidade <= 0:
             raise forms.ValidationError('Não é possivel cadastrar 0 ou menos itens.')
         else:
             return quantidade
-        
 
 # Classe Form que é utilizada para o cadastro de feedbacks de visitantes do site.
 class FeedbackForm(forms.ModelForm):

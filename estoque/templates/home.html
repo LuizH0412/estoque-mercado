@@ -52,16 +52,12 @@
       <nav id="navmenu" class="navmenu">
         <ul>
           {% if user.is_authenticated %}
-            {% if user.is_superuser %}
-              <li><a href="{% url 'home' %}" class="">Home</a></li>
-              <li><a href="{% url 'produtos' %}">Produtos</a></li>
-              <li><a href="{% url 'add_produto' %}">Cadastrar Produtos</a></li>
-              <li><a href="{% url 'feedback' %}">Feedback</a></li>
-            {% else %}
-              <li><a href="{% url 'home' %}" class="">Home</a></li>
-              <li><a href="{% url 'produtos' %}">Produtos</a></li>
-              <li><a href="{% url 'feedback' %}">Feedback</a></li>
-            {% endif %}
+            <li><a href="{% url 'home' %}" class="">Home</a></li>
+            <li><a href="{% url 'produtos' %}">Produtos</a></li>
+            <li><a href="{% url 'add_produto' %}">Cadastrar Produtos</a></li>
+            <li><a href="{% url 'feedback' %}">Feedback</a></li>
+          {% else %}
+            <li><a href="{% url 'home' %}" class="">Home</a></li>
           {% endif %}
 
         </ul>

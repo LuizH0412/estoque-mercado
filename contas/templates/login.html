@@ -6,7 +6,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Produtos</title>
+  <title>Login</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -126,16 +126,10 @@ input[type="submit"]:hover {
       <nav id="navmenu" class="navmenu">
         <ul>
           {% if user.is_authenticated %}
-            {% if user.is_superuser %}
-              <li><a href="{% url 'home' %}" class="">Home</a></li>
-              <li><a href="{% url 'produtos' %}">Produtos</a></li>
-              <li><a href="{% url 'add_produto' %}">Cadastrar Produtos</a></li>
-              <li><a href="{% url 'feedback' %}">Feedback</a></li>
-            {% else %}
-              <li><a href="{% url 'home' %}" class="">Home</a></li>
-              <li><a href="{% url 'produtos' %}">Produtos</a></li>
-              <li><a href="{% url 'feedback' %}">Feedback</a></li>
-            {% endif %}
+            <li><a href="{% url 'home' %}" class="">Home</a></li>
+            <li><a href="{% url 'produtos' %}">Produtos</a></li>
+            <li><a href="{% url 'add_produto' %}">Cadastrar Produtos</a></li>
+            <li><a href="{% url 'feedback' %}">Feedback</a></li>
           {% else %}
             <li><a href="{% url 'home' %}" class="">Home</a></li>
           {% endif %}
@@ -204,16 +198,10 @@ input[type="submit"]:hover {
           <h4>Useful Links</h4>
           <ul>
             {% if user.is_authenticated %}
-              {% if user.is_superuser %}
-                <li><i class="bi bi-chevron-right"></i> <a href="{% url 'home' %}">Home</a></li>
-                <li><i class="bi bi-chevron-right"></i> <a href="{% url 'produtos' %}">Produtos</a></li>
-                <li><i class="bi bi-chevron-right"></i> <a href="{% url 'add_produto' %}">Cadastrar Produtos</a></li>
-                <li><i class="bi bi-chevron-right"></i> <a href="{% url 'feedback' %}">Feedback</a></li>
-              {% else %}
-                <li><i class="bi bi-chevron-right"></i> <a href="{% url 'home' %}">Home</a></li>
-                <li><i class="bi bi-chevron-right"></i> <a href="{% url 'produtos' %}">Produtos</a></li>
-                <li><i class="bi bi-chevron-right"></i> <a href="{% url 'feedback' %}">Feedback</a></li>
-              {% endif %}
+              <li><i class="bi bi-chevron-right"></i> <a href="{% url 'home' %}">Home</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="{% url 'produtos' %}">Produtos</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="{% url 'add_produto' %}">Cadastrar Produtos</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="{% url 'feedback' %}">Feedback</a></li>
             {% else %}
               <li><i class="bi bi-chevron-right"></i> <a href="{% url 'home' %}">Home</a></li>
             {% endif %}

@@ -31,6 +31,8 @@ class ProdutosView(ListView):
         if search:
             produto = produto.filter(nome__icontains=search)
         return produto
+    
+    
 
 
 # Decorator que impeça que quem não esteja logado acesse outras áreas do projeto sem estar logado.
@@ -41,7 +43,6 @@ class AdicionarProdutoView(CreateView):
     form_class = ProdutoModelForm
     template_name = 'add_produto.html'
     success_url = '/produtos/'
-
 
 # Decorator que impeça que quem não esteja logado acesse outras áreas do projeto sem estar logado.
 # View que cuida de renderizar a página de detalhes do produto.
