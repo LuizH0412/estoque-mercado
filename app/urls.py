@@ -2,6 +2,8 @@ from django.contrib import admin
 from django.urls import path
 from contas.views import LoginView, RegistroView, LogoutView
 from estoque.views import AdicionarProdutoView, ProdutosView, ProdutoDetailView, ProdutoUpdateView, ProdutoDeleteView, HomeView, FeedbackView, AdicionarFeedback, FeedbackDetailView
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -17,4 +19,4 @@ urlpatterns = [
     path('feedback/', FeedbackView.as_view(), name='feedback'),
     path('add_feedback/', AdicionarFeedback.as_view(), name='add_feedback'),
     path('feedback/<int:pk>/', FeedbackDetailView.as_view(), name='feedback_detail'),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
