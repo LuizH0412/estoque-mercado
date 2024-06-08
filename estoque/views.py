@@ -19,6 +19,7 @@ class HomeView(View):
 
 # Decorator que impeça que quem não esteja logado acesse outras áreas do projeto sem estar logado.
 # View que retorna a exibição dos produtos, filtra e ordena pelo nome, além da lógica de busca dos produtos.
+@method_decorator(login_required(login_url='login'), name='dispatch')
 class ProdutosView(ListView):
     model = Produto
     template_name = 'produtos.html'
